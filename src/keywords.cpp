@@ -144,6 +144,7 @@ static const chunk_tag_t keywords[] =
    { "friend",           CT_FRIEND,       LANG_CPP                                                                    },
    { "function",         CT_FUNCTION,     LANG_D | LANG_ECMA                                                          },
    { "get",              CT_GETSET,       LANG_CS | LANG_VALA                                                         },
+   { "getter",           CT_OC_GETTER,    LANG_OC                                                                     },
    { "goto",             CT_GOTO,         LANG_ALL                                                                    }, // PAWN
    { "idouble",          CT_TYPE,         LANG_D                                                                      },
    { "if",               CT_IF,           LANG_ALL                                                                    }, // PAWN

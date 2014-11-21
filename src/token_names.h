@@ -209,6 +209,7 @@ const char *token_names[] =
    "OC_BLOCK_EXPR",
    "OC_BLOCK_CARET",
    "OC_AT",
+   "OC_GETTER",
    "PP_DEFINE",
    "PP_DEFINED",
    "PP_INCLUDE",
