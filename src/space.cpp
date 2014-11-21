@@ -1426,6 +1426,14 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
       log_rule("UO_sp_before_template_paren");
       return(cpd.settings[UO_sp_before_template_paren].a);
    }
+    
+#warning here
+    if (first->prev->type == CT_TYPEDEF && second->type == CT_TPAREN_OPEN) {
+        if (cpd.settings[UO_sp_between_typedef_return_paren].a != AV_IGNORE) {
+            log_rule("sp_between_typedef_return_paren");
+            return (cpd.settings[UO_sp_between_typedef_return_paren].a);
+        }
+    }
 
    if ((second->type != CT_PTR_TYPE) &&
        ((first->type == CT_QUALIFIER) || (first->type == CT_TYPE)))
