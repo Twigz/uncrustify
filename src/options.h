@@ -200,7 +200,7 @@ enum uncrustify_options
    UO_sp_fparen_brace,          // space between ')' and '{' of function
    UO_sp_fparen_dbrace,         // space between ')' and '{{' of double-brace init
    UO_sp_sparen_brace,          // space between ')' and '{' of if, while, etc
-
+   UO_sp_between_typedef_return_paren, // space between the return type and ( of a typedef
    UO_sp_after_cast,            // space after C & D cast - "(int) a" vs "(int)a"
    UO_sp_inside_paren_cast,     // spaces inside the parens of a cast
    UO_sp_cpp_cast_paren,
