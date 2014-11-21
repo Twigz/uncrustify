@@ -106,7 +106,7 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
    chunk_t  *next;
 
    min_sp = 1;
-
+    
    if ((first->type == CT_IGNORED) || (second->type == CT_IGNORED))
    {
       log_rule("IGNORED");
@@ -553,7 +553,21 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
          return(cpd.settings[UO_sp_enum_paren].a);
       }
    }
-
+    
+   if (first->type == CT_OC_GETTER && second->type == CT_ASSIGN) {
+      if (cpd.settings[UO_sp_around_getter_attribute].a != AV_IGNORE) {
+          log_rule("sp_around_getter_attribute");
+          return (cpd.settings[UO_sp_around_getter_attribute].a);
+      }
+   }
+    
+   if (first->type == CT_ASSIGN && first->next->type == CT_WORD && first->prev->type == CT_OC_GETTER) {
+      if (cpd.settings[UO_sp_around_getter_attribute].a != AV_IGNORE) {
+          log_rule("sp_around_getter_attribute");
+          return (cpd.settings[UO_sp_around_getter_attribute].a);
+      }
+   }
+    
    if (second->type == CT_ASSIGN)
    {
       if (second->flags & PCF_IN_ENUM)
