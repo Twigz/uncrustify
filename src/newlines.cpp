@@ -3257,6 +3257,12 @@ void do_blank_lines(void)
                   blank_line_set(pc, UO_nl_after_func_body_class);
                }
             }
+            else if ((next != NULL) && next->type == CT_OC_MSG_NAME && cpd.settings[UO_nl_after_anonymous_func_body].n > 0) {
+                if (cpd.settings[UO_nl_after_anonymous_func_body].n != pc->nl_count)
+                {
+                    blank_line_set(pc, UO_nl_after_anonymous_func_body);
+                }
+            }
             else if (cpd.settings[UO_nl_after_func_body].n > 0)
             {
                if (cpd.settings[UO_nl_after_func_body].n != pc->nl_count)
