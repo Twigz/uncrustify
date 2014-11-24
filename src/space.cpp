@@ -1287,7 +1287,7 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
         (first->parent_type == CT_FUNC_VAR)))
    {
        
-       if (cpd.settings[UO_sp_around_inline_block].a != AV_IGNORE && strcmp(first->str, "^")) {
+       if (cpd.settings[UO_sp_around_inline_block].a != AV_IGNORE && strcmp(first->str, "^") == 0) {
            return(cpd.settings[UO_sp_around_inline_block].a);
        }
        
