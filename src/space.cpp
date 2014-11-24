@@ -1441,8 +1441,8 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
       return(cpd.settings[UO_sp_before_template_paren].a);
    }
     
-   if (first->prev->type == CT_TYPEDEF && second->type == CT_TPAREN_OPEN) {
-      if (cpd.settings[UO_sp_between_typedef_return_paren].a != AV_IGNORE) {
+   if (first->prev && first->prev->type == CT_TYPEDEF && first->type == CT_TYPE && second->type == CT_TPAREN_OPEN) {
+      if (cpd.settings[UO_sp_between_typedef_return_paren].a == AV_REMOVE) {
           log_rule("sp_between_typedef_return_paren");
           return (cpd.settings[UO_sp_between_typedef_return_paren].a);
       }
