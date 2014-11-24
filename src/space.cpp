@@ -1469,7 +1469,8 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
        ((first->type == CT_QUALIFIER) || (first->type == CT_TYPE)))
    {
        
-       if (second->type == CT_TPAREN_OPEN && strcmp(second->next->str, "^") == 0 && cpd.settings[UO_sp_around_inline_block].a != AV_IGNORE) {
+       if (((second->type == CT_TPAREN_OPEN && strcmp(second->next->str, "^") == 0) || (second->type == CT_FPAREN_OPEN && first->parent_type == CT_OC_BLOCK_EXPR)) && cpd.settings[UO_sp_around_inline_block].a != AV_IGNORE) {
+           log_rule("sp_around_inline_block");
            return cpd.settings[UO_sp_around_inline_block].a;
        }
        
