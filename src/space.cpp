@@ -659,6 +659,7 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
       return(cpd.settings[UO_sp_angle_shift].a);
    }
 
+#warning sp_inside_angle
    /* spacing around template < > stuff */
    if ((first->type == CT_ANGLE_OPEN) ||
        (second->type == CT_ANGLE_CLOSE))
@@ -1248,6 +1249,8 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
       log_rule("sp_bool");
       return(arg);
    }
+    
+#warning sp_compare
    if ((first->type == CT_COMPARE) || (second->type == CT_COMPARE))
    {
       log_rule("sp_compare");
@@ -1276,15 +1279,20 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
       log_rule("sp_between_ptr_star");
       return(cpd.settings[UO_sp_between_ptr_star].a);
    }
-
+    
    if ((first->type == CT_PTR_TYPE) &&
        (cpd.settings[UO_sp_after_ptr_star_func].a != AV_IGNORE) &&
        ((first->parent_type == CT_FUNC_DEF) ||
         (first->parent_type == CT_FUNC_PROTO) ||
         (first->parent_type == CT_FUNC_VAR)))
    {
-      log_rule("sp_after_ptr_star_func");
-      return(cpd.settings[UO_sp_after_ptr_star_func].a);
+       
+       if (cpd.settings[UO_sp_around_inline_block].a != AV_IGNORE && strcmp(first->str, "^") == 0) {
+           return(cpd.settings[UO_sp_around_inline_block].a);
+       }
+       
+        log_rule("sp_after_ptr_star_func");
+        return(cpd.settings[UO_sp_after_ptr_star_func].a);
    }
 
    if ((first->type == CT_PTR_TYPE) && CharTable::IsKw1(second->str[0]))
@@ -1451,9 +1459,14 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
    if ((second->type != CT_PTR_TYPE) &&
        ((first->type == CT_QUALIFIER) || (first->type == CT_TYPE)))
    {
-      arg = cpd.settings[UO_sp_after_type].a;
-      log_rule("sp_after_type");
-      return((arg != AV_REMOVE) ? arg : AV_FORCE);
+       
+       if (second->type == CT_TPAREN_OPEN && strcmp(second->next->str, "^") == 0 && cpd.settings[UO_sp_around_inline_block].a != AV_IGNORE) {
+           return cpd.settings[UO_sp_around_inline_block].a;
+       }
+       
+       arg = cpd.settings[UO_sp_after_type].a;
+       log_rule("sp_after_type");
+       return((arg != AV_REMOVE) ? arg : AV_FORCE);
    }
 
    if ((first->type == CT_MACRO_OPEN) ||
