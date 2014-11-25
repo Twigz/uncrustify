@@ -1248,6 +1248,7 @@ void indent_text(void)
       else if ((pc->type == CT_CLASS_COLON) ||
                (pc->type == CT_CONSTR_COLON))
       {
+#warning here
          /* just indent one level */
          indent_pse_push(frm, pc);
          frm.pse[frm.pse_tos].indent     = frm.pse[frm.pse_tos - 1].indent_tmp + indent_size;
