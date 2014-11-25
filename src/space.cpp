@@ -1620,6 +1620,11 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
       log_rule("sp_after_oc_property");
       return(cpd.settings[UO_sp_after_oc_property].a);
    }
+    
+   if (first->type == CT_PAREN_CLOSE && first->parent_type == CT_OC_PROPERTY && second->type == CT_TYPE) {
+      log_rule("sp_after_oc_property_attributes_paren");
+      return(cpd.settings[UO_sp_after_oc_property_attributes_paren].a);
+   }
 
    if ((first->type == CT_EXTERN) && (second->type == CT_PAREN_OPEN))
    {

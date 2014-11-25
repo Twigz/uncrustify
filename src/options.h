@@ -365,6 +365,7 @@ enum uncrustify_options
    UO_sp_after_oc_block_caret,
    UO_sp_after_oc_msg_receiver,
    UO_sp_after_oc_property,
+   UO_sp_after_oc_property_attributes_paren,
    UO_sp_around_getter_attribute,
    UO_sp_around_inline_block,  // void(^reloadBlock)()  vs. void (^ reloadBlock)()
    UO_sp_cond_colon,

@@ -506,7 +506,8 @@ void register_options(void)
                   "'[receiver selector ...]'");
    unc_add_option("sp_after_oc_property", UO_sp_after_oc_property, AT_IARF,
                   "Add or remove space after @property.");
-
+   unc_add_option("sp_after_oc_property_attributes_paren", UO_sp_after_oc_property_attributes_paren, AT_IARF,
+                  "Add or remove space after closing parenthesis on property attributes");
    unc_add_option("sp_cond_colon", UO_sp_cond_colon, AT_IARF,
                   "Add or remove space around the ':' in 'b ? t : f'");
    unc_add_option("sp_cond_colon_before", UO_sp_cond_colon_before, AT_IARF,
