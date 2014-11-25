@@ -1310,8 +1310,8 @@ static void output_comment_multi(chunk_t *pc)
                 * '\name' is a common parameter documentation thing.
                 */
                if (cpd.settings[UO_cmt_indent_multi].b &&
-                   (line[0] != '*') && (line[0] != '|') && (line[0] != '#') &&
-                   ((line[0] != '\\') || unc_isalpha(line[1])) && (line[0] != '+'))
+                   (line[0] != '*') && (line[0] != '#') &&
+                   ((line[0] != '\\') || unc_isalpha(line[1])) && ((cpd.lang_flags & LANG_OC && cpd.settings[UO_cmt_oc_allow_ascii_characters].b) || (line[0] != '|' && line[0] != '+')))
                {
                   int start_col = cmt_col + cpd.settings[UO_cmt_sp_before_star_cont].n;
 

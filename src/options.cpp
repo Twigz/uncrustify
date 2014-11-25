@@ -1225,6 +1225,9 @@ void register_options(void)
    unc_add_option("cmt_sp_after_star_cont", UO_cmt_sp_after_star_cont, AT_NUM,
                   "The number of spaces to insert after the star on subsequent comment lines");
 
+   unc_add_option("cmt_oc_allow_ascii_characters", UO_cmt_oc_allow_ascii_characters, AT_BOOL,
+                  "Allow/Disallow ascii characters at the beginning of an objective-c comment line.");
+
    unc_add_option("cmt_multi_check_last", UO_cmt_multi_check_last, AT_BOOL,
                   "For multi-line comments with a '*' lead, remove leading spaces if the first and last lines of\n"
                   "the comment are the same length. Default=True");
