@@ -1245,8 +1245,8 @@ void indent_text(void)
          frm.pse[frm.pse_tos].indent_tmp = frm.pse[frm.pse_tos].indent;
          frm.pse[frm.pse_tos].indent_tab = frm.pse[frm.pse_tos].indent;
       }
-      else if ((pc->type == CT_CLASS_COLON) ||
-               (pc->type == CT_CONSTR_COLON))
+      else if (((pc->type == CT_CLASS_COLON) ||
+               (pc->type == CT_CONSTR_COLON)) && cpd.lang_flags & LANG_CPP)
       {
          /* just indent one level */
          indent_pse_push(frm, pc);
