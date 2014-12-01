@@ -305,12 +305,24 @@ void output_text(FILE *pfile)
    {
       cpd.output_tab_as_space = (cpd.settings[UO_cmt_convert_tab_to_spaces].b &&
                                  chunk_is_comment(pc));
+       
       if (pc->type == CT_NEWLINE)
       {
-         for (cnt = 0; cnt < pc->nl_count; cnt++)
-         {
-            add_char('\n');
-         }
+          for (cnt = 0; cnt < pc->nl_count; cnt++)
+          {
+              add_char('\n');
+              
+              if (pc->nl_count >= 2 && cnt == 0) {
+                  int indentLevel = pc->brace_level;
+                  
+                  for (int col = 0; col < indentLevel; col++) {
+                      for (int spaces = 0; spaces < cpd.settings[UO_output_tab_size].n; spaces++) {
+                          write_char(' ');
+                      }
+                  }
+              }
+          }
+                    
          cpd.did_newline = 1;
          cpd.column      = 1;
          LOG_FMT(LOUTIND, " xx\n");
