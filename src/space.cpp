@@ -1252,6 +1252,11 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
    if ((first->type == CT_COMPARE) || (second->type == CT_COMPARE))
    {
        if (first->parent_type == CT_OC_BLOCK_EXPR) {
+           if (first->type == CT_TYPE) {
+               log_rule("sp_before_angle");
+               return cpd.settings[UO_sp_before_angle].a;
+           }
+
            if (first->type == CT_COMPARE && second->type == CT_WORD && second->parent_type != CT_OC_MSG_DECL) {
                log_rule("sp_after_angle");
                return(cpd.settings[UO_sp_after_angle].a);
@@ -1261,7 +1266,7 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
                log_rule("sp_before_ptr_star");
                return cpd.settings[UO_sp_before_ptr_star].a;
            }
-           
+
            log_rule("sp_inside_angle");
            return(cpd.settings[UO_sp_inside_angle].a);
        }
