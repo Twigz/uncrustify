@@ -29,7 +29,7 @@ then
         then
             copyPath=$uncrustifyDirectory/$(basename $p)
 
-            $uncrustifyPath -c $uncrustifyConfigurationPath -f $p > $copyPath
+            $uncrustifyPath -c $uncrustifyConfigurationPath -l OC -f $p > $copyPath
             cp -f $copyPath $p
         fi
     done <$diffFilesPath

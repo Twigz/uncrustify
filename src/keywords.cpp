@@ -42,7 +42,7 @@ static const chunk_tag_t keywords[] =
    { "@synthesize",      CT_OC_DYNAMIC,   LANG_OC | LANG_CPP | LANG_C                                                 },
    { "@throw",           CT_THROW,        LANG_OC                                                                     },
    { "@try",             CT_TRY,          LANG_OC | LANG_CPP | LANG_C                                                 },
-   { "NS_ENUM",          CT_ENUM,         LANG_OC | LANG_CPP                                                          },
+   { "NS_ENUM",          CT_ENUM,         LANG_OC                                                                     },
    { "NS_OPTIONS",       CT_ENUM,         LANG_OC                                                                     },
    { "_Bool",            CT_TYPE,         LANG_CPP                                                                    },
    { "_Complex",         CT_TYPE,         LANG_CPP                                                                    },
@@ -144,7 +144,7 @@ static const chunk_tag_t keywords[] =
    { "friend",           CT_FRIEND,       LANG_CPP                                                                    },
    { "function",         CT_FUNCTION,     LANG_D | LANG_ECMA                                                          },
    { "get",              CT_GETSET,       LANG_CS | LANG_VALA                                                         },
-   { "getter",           CT_OC_GETTER,    LANG_OC | LANG_CPP                                                          },
+   { "getter",           CT_OC_GETTER,    LANG_OC                                                                     },
    { "goto",             CT_GOTO,         LANG_ALL                                                                    }, // PAWN
    { "idouble",          CT_TYPE,         LANG_D                                                                      },
    { "if",               CT_IF,           LANG_ALL                                                                    }, // PAWN
