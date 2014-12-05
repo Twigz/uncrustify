@@ -3,11 +3,11 @@ Add this script as a run phase to use uncrustify.
 ```
 scriptPath=ucscript.sh
 
-curl -o $scriptPath -L https://raw.githubusercontent.com/Twigz/uncrustify/f1e4c62bea917edf68f1183da53dc2034654f64d/Uncrustify-CI/uncrustifyscript.sh
+curl -o $scriptPath -L https://github.com/Twigz/uncrustify/raw/master/Uncrustify-CI/uncrustifyscript.sh
 
 if [ -f $scriptPath ]
 then
-    sh $scriptPath
+sh $scriptPath
 fi
 
 rm -f $scriptPath
