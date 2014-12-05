@@ -1257,6 +1257,11 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
                return(cpd.settings[UO_sp_after_angle].a);
            }
            
+           if (second != NULL && second->type == CT_PTR_TYPE) {
+               log_rule("sp_before_ptr_star");
+               return cpd.settings[UO_sp_before_ptr_star].a;
+           }
+           
            log_rule("sp_inside_angle");
            return(cpd.settings[UO_sp_inside_angle].a);
        }
