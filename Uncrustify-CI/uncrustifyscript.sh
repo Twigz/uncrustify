@@ -7,7 +7,7 @@ uncrustifyConfigurationPath=$uncrustifyDirectory/uncrustify.cfg
 
 mkdir -p $uncrustifyDirectory
 
-curl -o $uncrustifyPath -L https://github.com/Twigz/uncrustify/raw/1fa8fba8bcbe982adc390abf37e63df444912431/Uncrustify-CI/uncrustify
+curl -o $uncrustifyPath -L https://github.com/Twigz/uncrustify/raw/4dff791e1f81bda5464528bfe321290f4a36a438/Uncrustify-CI/uncrustify
 curl -o $uncrustifyConfigurationPath -L https://raw.githubusercontent.com/Twigz/uncrustify/1fa8fba8bcbe982adc390abf37e63df444912431/Uncrustify-CI/uncrustify.cfg
 
 modifiedFilesPath=$uncrustifyDirectory/modified.txt
