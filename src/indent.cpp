@@ -447,6 +447,10 @@ static chunk_t *oc_msg_block_indent(chunk_t *pc, bool from_brace,
    }
    if (from_keyword)
    {
+       while (chunk_get_prev_nc(tmp)->type != CT_NEWLINE) {
+           tmp = chunk_get_prev_nc(tmp);
+       }
+       
       return tmp;
    }
    return NULL;
@@ -956,24 +960,7 @@ void indent_text(void)
                   //  - otherwise, indent from previous block (the "else" statement here)
                   if (cpd.settings[UO_indent_oc_block_msg_xcode_style].b)
                   {
-                     chunk_t *colon = oc_msg_prev_colon(pc);
-                     chunk_t *param_name = chunk_get_prev(colon);
-                     chunk_t *before_param = chunk_get_prev(param_name);
-
-                     if (before_param && (before_param->type == CT_NEWLINE))
-                     {
-                        indent_from_keyword = true;
-                        indent_from_colon   = false;
-                        indent_from_caret   = false;
-                        indent_from_brace   = false;
-                     }
-                     else
-                     {
-                        indent_from_brace   = false;
-                        indent_from_colon   = false;
-                        indent_from_caret   = false;
-                        indent_from_keyword = false;
-                     }
+                     indent_from_keyword = true;
                   }
 
                   chunk_t *ref = oc_msg_block_indent(pc, indent_from_brace,
@@ -988,6 +975,7 @@ void indent_text(void)
                   else
                   {
                      frm.pse[frm.pse_tos].indent = 1 + ((pc->brace_level + 1) * indent_size);
+                      
                      indent_column_set(frm.pse[frm.pse_tos].indent - indent_size);
                   }
                }
@@ -998,6 +986,7 @@ void indent_text(void)
             }
             else
             {
+#warning this might be the issue with the macro
                /* We are inside ({ ... }) -- indent one tab from the paren */
                frm.pse[frm.pse_tos].indent = frm.pse[frm.pse_tos - 1].indent_tmp + indent_size;
             }
@@ -1113,6 +1102,7 @@ void indent_text(void)
             }
          }
 
+#warning save
          /* Save the brace indent */
          frm.pse[frm.pse_tos].brace_indent = indent_column;
       }
