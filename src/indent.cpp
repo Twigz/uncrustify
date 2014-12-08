@@ -1468,7 +1468,11 @@ void indent_text(void)
             }
             else
             {
-               frm.pse[frm.pse_tos].indent = frm.pse[frm.pse_tos - 1].indent + pc->len() + 1;
+               frm.pse[frm.pse_tos].indent = frm.pse[frm.pse_tos - 1].indent;
+                
+                if (next != NULL && next->next != NULL && next->next->parent_type != CT_OC_BLOCK_EXPR) {
+                    frm.pse[frm.pse_tos].indent += pc->len() + 1;
+                }
             }
             frm.pse[frm.pse_tos].indent_tmp = frm.pse[frm.pse_tos - 1].indent;
          }
