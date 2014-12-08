@@ -214,6 +214,7 @@ static bool chunk_ends_type(chunk_t *start)
           (pc->type == CT_TYPEDEF) ||
           (pc->type == CT_BRACE_OPEN) ||
           (pc->type == CT_BRACE_CLOSE) ||
+          (pc->type == CT_FPAREN_OPEN && pc->parent_type == CT_FUNC_CALL && pc->flags & LANG_OC) ||
           chunk_is_forin(pc) ||
           ((pc->type == CT_SPAREN_OPEN) && last_lval))
       {
