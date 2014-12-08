@@ -312,7 +312,7 @@ void output_text(FILE *pfile)
           {
               add_char('\n');
               
-              if (pc->nl_count >= 2 && cnt < pc->nl_count - 1) {
+              if (cpd.settings[UO_mod_indent_blank_lines].b && pc->nl_count >= 2 && cnt < pc->nl_count - 1) {
                   int indentLevel = pc->brace_level;
                   
                   for (int col = 0; col < indentLevel; col++) {

@@ -1308,7 +1308,8 @@ void register_options(void)
                   "Will only remove the braces if there are no variable declarations in the block.");
    unc_add_option("mod_remove_empty_return", UO_mod_remove_empty_return, AT_BOOL,
                   "If TRUE, it will remove a void 'return;' that appears as the last statement in a function.");
-
+   unc_add_option("mod_indent_blank_lines", UO_mod_indent_blank_lines, AT_BOOL,
+                  "if TRUE, it will indent empty newlines.");
    unc_begin_group(UG_preprocessor, "Preprocessor options");
    unc_add_option("pp_indent", UO_pp_indent, AT_IARF,
                   "Control indent of preprocessors inside #if blocks at brace level 0 (file-level)");

@@ -662,7 +662,7 @@ enum uncrustify_options
    UO_mod_move_case_break,
    UO_mod_case_brace,
    UO_mod_remove_empty_return,
-
+   UO_mod_indent_blank_lines,
 
    /*
     * Comment modifications
