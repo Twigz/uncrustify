@@ -868,7 +868,7 @@ static void check_template(chunk_t *start)
             in_if = true;
             break;
          }
-         if (pc->type == CT_SQUARE_OPEN)
+         if (pc->type == CT_SQUARE_OPEN && !(cpd.lang_flags & LANG_OC))
          {
             LOG_FMT(LTEMPL, " - Not a template: after a square open\n");
             set_chunk_type(start, CT_COMPARE);
