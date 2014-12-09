@@ -909,7 +909,7 @@ void indent_text(void)
          }
       }
       else if (pc->type == CT_SQUARE_CLOSE) {
-           if (frm.pse[frm.pse_tos].type == CT_SQUARE_OPEN && (pc->parent_type == CT_OC_AT || prev->parent_type == CT_OC_AT)) {
+           if (pc->parent_type == CT_OC_AT) {
                chunk_t *previousBrace = prev;
                
                while (previousBrace != NULL && previousBrace->type != CT_SQUARE_OPEN) {
