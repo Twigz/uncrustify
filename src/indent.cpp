@@ -891,8 +891,13 @@ void indent_text(void)
          if (frm.pse[frm.pse_tos].type == CT_BRACE_OPEN)
          {
             /* Indent the brace to match the open brace */
-            indent_column_set(frm.pse[frm.pse_tos].brace_indent);
-
+             if (pc->parent_type == CT_OC_AT) {
+                 indent_column_set(frm.pse[frm.pse_tos].indent);
+             }
+             else {
+                 indent_column_set(frm.pse[frm.pse_tos].brace_indent);
+             }
+             
             if (frm.pse[frm.pse_tos].ip.ref)
             {
                pc->indent.ref   = frm.pse[frm.pse_tos].ip.ref;
@@ -986,15 +991,26 @@ void indent_text(void)
             }
             else
             {
-#warning this might be the issue with the macro
-               /* We are inside ({ ... }) -- indent one tab from the paren */
-               frm.pse[frm.pse_tos].indent = frm.pse[frm.pse_tos - 1].indent_tmp + indent_size;
+                if (pc->parent_type == CT_OC_AT) {
+                    chunk_t *ref = oc_msg_block_indent(pc, true, false, false, false);
+                    frm.pse[frm.pse_tos].indent = ref->column + 1;
+                }
+                else {
+                    /* We are inside ({ ... }) -- indent one tab from the paren */
+                    frm.pse[frm.pse_tos].indent = frm.pse[frm.pse_tos - 1].indent_tmp + indent_size ;
+                }
             }
          }
          else
          {
             /* Use the prev indent level + indent_size. */
-            frm.pse[frm.pse_tos].indent = frm.pse[frm.pse_tos - 1].indent + indent_size;
+             if (pc->parent_type == CT_OC_AT) {
+                 chunk_t *ref = oc_msg_block_indent(pc, true, false, false, false);
+                 frm.pse[frm.pse_tos].indent = ref->column + 1;
+             }
+             else {
+                 frm.pse[frm.pse_tos].indent = frm.pse[frm.pse_tos - 1].indent + indent_size;
+             }
 
             /* If this brace is part of a statement, bump it out by indent_brace */
             if ((pc->parent_type == CT_IF) ||
