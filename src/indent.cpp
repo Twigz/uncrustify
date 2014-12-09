@@ -908,6 +908,17 @@ void indent_text(void)
             frm.level--;
          }
       }
+      else if (pc->type == CT_SQUARE_CLOSE) {
+           if (frm.pse[frm.pse_tos].type == CT_SQUARE_OPEN && (pc->parent_type == CT_OC_AT || prev->parent_type == CT_OC_AT)) {
+               chunk_t *previousBrace = prev;
+               
+               while (previousBrace != NULL && previousBrace->type != CT_SQUARE_OPEN) {
+                   previousBrace = previousBrace->prev;
+               }
+               
+               indent_column_set(previousBrace->column + 1);
+           }
+      }
       else if (pc->type == CT_VBRACE_OPEN)
       {
          frm.level++;
@@ -1313,7 +1324,7 @@ void indent_text(void)
          {
             frm.pse[frm.pse_tos].indent_tab = frm.pse[frm.pse_tos].indent;
          }
-
+          
          if (((pc->type == CT_FPAREN_OPEN) || (pc->type == CT_ANGLE_OPEN)) &&
              ((cpd.settings[UO_indent_func_call_param].b &&
                ((pc->parent_type == CT_FUNC_CALL) ||
@@ -1360,7 +1371,7 @@ void indent_text(void)
             }
             frm.pse[frm.pse_tos].indent_tab = frm.pse[frm.pse_tos].indent;
          }
-
+        
          else if ((chunk_is_str(pc, "(", 1) && !cpd.settings[UO_indent_paren_nl].b) ||
                   (chunk_is_str(pc, "<", 1) && !cpd.settings[UO_indent_paren_nl].b) || /* TODO: add indent_angle_nl? */
                   (chunk_is_str(pc, "[", 1) && !cpd.settings[UO_indent_square_nl].b))
@@ -1408,6 +1419,12 @@ void indent_text(void)
                frm.pse[frm.pse_tos].indent_cont = true;
             }
          }
+          
+          if (pc->type == CT_SQUARE_OPEN && pc->parent_type == CT_OC_AT) {
+              chunk_t *ref = oc_msg_block_indent(pc, true, false, false, false);
+              frm.pse[frm.pse_tos].indent = ref->column + 1;
+          }
+
          frm.pse[frm.pse_tos].indent_tmp = frm.pse[frm.pse_tos].indent;
          frm.paren_count++;
       }
