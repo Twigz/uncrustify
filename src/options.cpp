@@ -324,6 +324,8 @@ void register_options(void)
                   "Add or remove space between an open paren and comma: '(,' vs '( ,'\n");
    unc_add_option("sp_before_ellipsis", UO_sp_before_ellipsis, AT_IARF,
                   "Add or remove space before the variadic '...' when preceded by a non-punctuator");
+   unc_add_option("sp_after_ellipsis", UO_sp_after_ellipsis, AT_IARF,
+                  "Add or remove space after a variadic '...' when followed by an opening brace.");
    unc_add_option("sp_after_class_colon", UO_sp_after_class_colon, AT_IARF,
                   "Add or remove space after class ':'");
    unc_add_option("sp_before_class_colon", UO_sp_before_class_colon, AT_IARF,

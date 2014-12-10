@@ -453,7 +453,7 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
          return(AV_FORCE);
       }
    }
-   if ((first->type == CT_ELLIPSIS) && CharTable::IsKw1(second->str[0]))
+   if (first->type == CT_ELLIPSIS)
    {
       log_rule("FORCE");
       return(AV_FORCE);
@@ -926,6 +926,16 @@ static argval_t do_space(chunk_t *first, chunk_t *second, int& min_sp, bool comp
 
    if ((first->type == CT_MEMBER) || (second->type == CT_MEMBER))
    {
+       if (cpd.settings[UO_sp_after_ellipsis].a != AV_IGNORE) {
+           if (strcmp(first->str.c_str(), ".") == 0 &&
+               first->prev != NULL && strcmp(first->prev->str.c_str(), ".") == 0 &&
+               first->prev->prev != NULL && strcmp(first->prev->prev->str.c_str(), ".") == 0 &&
+               second->type == CT_BRACE_OPEN) {
+               log_rule("sp_after_ellipsis");
+               return(cpd.settings[UO_sp_after_ellipsis].a);
+           }
+       }
+       
       log_rule("sp_member");
       return(cpd.settings[UO_sp_member].a);
    }
