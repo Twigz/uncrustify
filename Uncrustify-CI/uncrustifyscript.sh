@@ -14,7 +14,7 @@ modifiedFilesPath=$uncrustifyDirectory/modified.txt
 addedFilesPath=$uncrustifyDirectory/added.txt
 diffFilesPath=$uncrustifyDirectory/diff.txt
 
-git ls-files -m > $modifiedFilesPath
+git diff --name-only --diff-filter=M > $modifiedFilesPath
 git diff --cached --name-only --diff-filter=A > $addedFilesPath
 
 cat $modifiedFilesPath $addedFilesPath > $diffFilesPath
